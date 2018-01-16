@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+<head lang="zh">
+  <meta charset="UTF-8">
+  <title>Charts</title>  
+  <link rel="stylesheet"  href="css/bootstrap.min.css" >
+  <link rel="stylesheet" href="css/app.css" >
+  <style>
+    .chart-legend {
+      list-style-type: none;
+      margin-top: 5px;
+      text-align: center;
+    /* NOTE: Browsers automatically add 40px of padding-left to all lists, so we should offset that, otherwise the legend is off-center */
+      -webkit-padding-start: 0;
+    /* Webkit */
+      -moz-padding-start: 0;
+    /* Mozilla */
+      padding-left: 0;
+    /* IE (handles all cases, really, but we should also include the vendor-specific properties just to be safe) */
+    }
+    .chart-legend li {
+      display: inline-block;
+      white-space: nowrap;
+      position: relative;
+      margin-bottom: 4px;
+      border-radius: 5px;
+      padding: 2px 8px 2px 28px;
+      font-size: smaller;
+      cursor: default;
+    }
+    .chart-legend li span {
+      display: block;
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 20px;
+      height: 20px;
+      border-radius: 5px;
+    }
+  </style>
+</head>
+<body ng-app="examples" id="top">
+  <div class="navbar navbar-default navbar-fixed-top">
+    <div class="container" ng-controller="MenuCtrl">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" ng-click="isCollapsed = !isCollapsed">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand visible-xs" href="#">Angular Charts</a>
+      </div>
+      <nav class="hidden-xs">
+        <ul class="nav navbar-nav">
+          <li>
+            <a href="#top" role="button" class="navbar-brand">
+              实验数据曲线图
+            </a>
+          </li>
+          <li class="dropdown">          
+            <ul class="dropdown-menu">
+              <li ng-repeat="chart in charts"><a ng-href="#{{chart | lowercase }}-chart">{{chart}}</a></li>
+            </ul>
+          </li>         
+          <li><a href="#reactive">排口浓度</a></li>
+          <li><a href="#mixed">SBR进水浓度</a></li>
+          <li><a href="#mixed">调节池进水浓度</a></li>
+        </ul>
+      </nav>  
+    </div>
+  </div>
+  <div class="container-fluid">
+    <div class="text-center aspect-ratio" id="container" ng-controller="TicksCtrl">
+      <canvas width='1200' height='300' id="hero-bar" class="chart chart-line" chart-data="data"
+              chart-options="options" chart-labels="labels"></canvas>
+      <div class="header">
+        <h1>
+          Angular Chart
+        </h1>
+        <p>test</p>    
+      </div>
+    </div>
+  </div>
+  <div class="container">   
+    <section id="directives">
+      <div class="page-header">
+        <h1>数据</h1>
+      </div>
+      <div class="row">
+        <div class="col-lg-12 col-sm-12" id="line-chart" ng-controller="LineCtrl">
+          <div class="panel panel-default">
+            <div class="panel-heading">混合曲线</div>
+            <div class="panel-body">
+              <canvas id="line" class="chart chart-line" chart-data="data" chart-labels="labels"
+                      chart-click="onClick" chart-hover="onHover" chart-series="series" chart-options="options"
+                      chart-dataset-override="datasetOverride"></canvas>
+            </div>
+          </div>
+        </div>       
+      </div>    
+    </section>
+  </div>
+  <footer class="footer">
+    <div class="container">
+      <p>Designed and built by <a href="https://github.com/guos" target="_blank">farmer</a></p> 
+      <p><strong>Credits</strong>: <a href="http://www.chartjs.org/">Chart.js</a> and <a href="https://angularjs.org/">AngularJS</a></p>
+    </div>
+  </footer>
+
+  <script src="js/lib/angular.min.js"></script>
+  <script src="js/lib/Chart.min.js"></script>
+  <script src="js/lib/ui-bootstrap-tpls.min.js"></script>
+  <script src="js/lib/angular-chart.min.js"></script>
+  <script src="js/lib/smoothscroll.min.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
